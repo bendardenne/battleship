@@ -12,6 +12,9 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/model)
 add_subdirectory(${PROJECT_SOURCE_DIR}/ui)
 add_subdirectory(${PROJECT_SOURCE_DIR}/controller)
 
+
+configure_file(battleship.txt battleship.txt COPYONLY)
+
 #set(SOURCE_FILES main.cpp model/Grid.cpp ui/Menu.cpp model/Game.cpp model/Player.cpp ui/GameWindow.cpp ui/GridWindow.cpp)
 add_executable(Battleship main.cpp)
 

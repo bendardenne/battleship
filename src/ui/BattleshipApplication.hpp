@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <cursesapp.h>
+
 #include "../model/GameConfiguration.hpp"
 #include "../model/Game.hpp"
 #include "GameWindow.hpp"

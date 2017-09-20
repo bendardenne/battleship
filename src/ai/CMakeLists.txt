@@ -1,0 +1,1 @@
+add_library(ai RandomShipPlacer.cpp AIShooter.cpp AIShooter.hpp)
