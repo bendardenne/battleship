@@ -9,7 +9,7 @@
 const std::string &FireController::DEFAULT_MESSAGE = "← → ↓ ↑: Move\tEnter: Fire\tq: Quit";
 
 
-FireController::FireController(GameWindow &window, GridWindow *gridWindow) : AController(window), _gridWindow(gridWindow) {
+FireController::FireController(GameWindow &window, GridWindow *gridWindow) : AController(window, *gridWindow), _gridWindow(gridWindow) {
 
 }
 

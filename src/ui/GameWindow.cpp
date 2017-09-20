@@ -10,6 +10,7 @@
 #include "../controller/FireController.hpp"
 #include "../ai/RandomShipPlacer.hpp"
 #include "HiddenGridWindow.hpp"
+#include "../controller/AIFireController.hpp"
 
 
 GameWindow::GameWindow(NCursesWindow &par, Game &game) : NCursesColorWindow(par, par.lines(), par.cols(), 0, 0),
@@ -42,40 +43,40 @@ GameWindow::~GameWindow() {
 
 
 void GameWindow::run() {
-    AController *placeShips = new PlaceShipsController(*this, _gridWindows.first);
-    placeShips->append(new DefaultController(*this));
-    setController(placeShips);
-
     // Queue of controllers to enable successively
-    std::queue<AController *> controllers;
-    AController *fire = new FireController(*this, _gridWindows.second);
-    fire->append(new DefaultController(*this));
+//    std::queue<AController *> controllers;
 
-    controllers.push(fire);
+    AController *placeShips = new PlaceShipsController(*this, _gridWindows.first);
+    placeShips->append(new DefaultController(*this, *_gridWindows.first));
+    setController(placeShips);
+    delete placeShips;
+
+    AController *fire = new FireController(*this, _gridWindows.second);
+    fire->append(new DefaultController(*this, *_gridWindows.second));
+//    controllers.push(fire);
+
+    AIFireController *ai = new AIFireController(*this, *_gridWindows.first);
+    ai->append(new DefaultController(*this, *_gridWindows.first));
+//    controllers.push(ai);
+
+    setController(fire);
 
     while (_playing) {
-        if (_controller->finished()) {
-            if (!controllers.empty()) {
-                setController(controllers.front());
-                controllers.pop();
-            } else {
-                quit();
-            }
+        if(_controller == fire) {
+            setController(ai);
+        } else if (_controller == ai){
+            setController(fire);
+        } else {
+            return;     // Shouldn't happen
         }
-
-        int ch = _gridWindows.first->getch();
-        _controller->handleKey(ch);
     }
+
 }
 
 
 void GameWindow::setController(AController *controller) {
-    // TODO is this ok?
-    if (_controller) {
-        delete _controller;
-    }
     _controller = controller;
-    _controller->enable();
+    _controller->control();
 }
 
 void GameWindow::quit() {

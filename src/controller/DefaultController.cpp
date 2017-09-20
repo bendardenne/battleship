@@ -5,6 +5,10 @@
 #include "DefaultController.hpp"
 
 
+DefaultController::DefaultController(GameWindow &gameWindow, NCursesWindow& eventSource) : AController(gameWindow, eventSource) {
+
+}
+
 void DefaultController::handleKey(int key) {
     switch (key) {
         case 'q':
@@ -14,10 +18,6 @@ void DefaultController::handleKey(int key) {
             if (_next)
                 _next->handleKey(key);
     }
-}
-
-DefaultController::DefaultController(GameWindow &gameWindow) : AController(gameWindow) {
-
 }
 
 void DefaultController::enable() {

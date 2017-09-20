@@ -11,12 +11,17 @@ public:
     virtual void enable() = 0;
     virtual bool finished() const = 0;
     virtual void handleKey(int key) = 0;
+
+    virtual void control();
+
     void append(AController* next);
 
     virtual ~AController();
 protected:
-    AController(GameWindow& window);
+    AController(GameWindow& window, NCursesWindow& eventSource);
+
     GameWindow& _gameWindow;
+    NCursesWindow& _eventSource;
     AController* _next;
 private:
 

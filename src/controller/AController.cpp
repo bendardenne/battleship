@@ -4,7 +4,9 @@
 
 #include "AController.hpp"
 
-AController::AController(GameWindow &window) : _gameWindow(window), _next(nullptr) {
+AController::AController(GameWindow &window, NCursesWindow &eventSource) : _gameWindow(window),
+                                                                           _eventSource(eventSource),
+                                                                           _next(nullptr) {
 
 }
 
@@ -14,4 +16,13 @@ void AController::append(AController *next) {
 
 AController::~AController() {
     if (_next) delete _next;
+}
+
+void AController::control() {
+    enable();
+
+    while(!finished()) {
+        int ch = _eventSource.getch();
+        handleKey(ch);
+    }
 }

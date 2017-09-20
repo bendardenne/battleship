@@ -11,7 +11,7 @@
 const std::string &PlaceShipsController::DEFAULT_MESSAGE = "← → ↓ ↑: Move ship\tr: Rotate\tq: Quit";
 
 PlaceShipsController::PlaceShipsController(GameWindow &window, GridWindow *gridWindow) :
-        AController(window), _shipsToPlace(createShipsList(gridWindow->grid().fleet())), _gridWindow(gridWindow) {}
+        AController(window, *gridWindow), _shipsToPlace(createShipsList(gridWindow->grid().fleet())), _gridWindow(gridWindow) {}
 
 bool PlaceShipsController::finished() const {
     return _shipsToPlace.empty();

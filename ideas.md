@@ -1,6 +1,7 @@
 
 # Code
 
+- GridWindows can be refs? 
 - Should Grid manage the placing?
 - Cleaner color use
 - Use smart pointers
@@ -8,10 +9,11 @@
 - Check const
 - Valgrind
 - Use namespaces?
+- Use doxygen
 
 # Functionalities
 
-- RandomShipPlacer  what if no room? 
+- RandomShipPlacer  what if no room? -> currently, just fails to place ship.
 - Configuration
 - Fleet should be in config
 - Blink current placing ship?

@@ -24,6 +24,7 @@ RandomShipPlacer::placeShips(Grid &grid) const {
 
 void
 RandomShipPlacer::placeShip(std::shared_ptr<Ship> ship, Grid &grid) const {
+    // FIXME new engine every time?
     long seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::minstd_rand0 randomEngine = std::default_random_engine(seed);
 

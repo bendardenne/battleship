@@ -19,7 +19,7 @@ void VisibleGridWindow::redraw() {
                 addch(winy(j), winx(i), cell.ship->sunk() ? 'X' : 'O');
             }
             if (cell.status == CellStatus::hit) {
-                int color = cell.ship ? 8 : 7;
+                int color = cell.ship ? 8 : 4;  //was 8:7
                 chgat(winy(j), winx(i), 1, A_BOLD, color);
             }
         }
@@ -32,6 +32,7 @@ void VisibleGridWindow::redraw() {
     // Replace cursor where it was.
     move(y, x);
     syncup();
+    refresh();
 }
 
 
