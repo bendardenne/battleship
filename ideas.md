@@ -1,7 +1,7 @@
 
 # Code
 
-- GridWindows can be refs? 
+- GridWindows can be refs?
 - Should Grid manage the placing?
 - Cleaner color use
 - Use smart pointers
@@ -20,3 +20,4 @@
 - Show fleet panel
 - Leader board?
 - Timed Games?
+- AI: Remember sunk ships and don't shoot in areas smaller than smallest ship left

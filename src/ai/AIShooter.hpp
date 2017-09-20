@@ -28,12 +28,15 @@ private:
     std::set<Coordinates> _hitZones;
 
     Coordinates shootAtRandom();
-    bool shootNearHit(Coordinates source, Coordinates& target);
+
+    Coordinates shootNearHit();
     void removeShipFromHitZones(Ship &ship, const ShipLocation &at);
+
     bool exploreUp(const Coordinates &source, Coordinates &targetSFTC);
     bool exploreDown(const Coordinates &source, Coordinates &targetSFTC);
     bool exploreLeft(const Coordinates &source, Coordinates &targetSFTC);
     bool exploreRight(const Coordinates &source, Coordinates &targetSFTC);
-    bool randomNeighbour(const Coordinates& pair, Coordinates& target);
+
+    Coordinates randomNeighbour(const Coordinates &source);
 };
 

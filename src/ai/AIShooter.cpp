@@ -15,17 +15,7 @@ AIShooter::AIShooter(Grid &targetGrid) : _targetGrid(targetGrid) {
 }
 
 std::pair<int, int> AIShooter::shoot() {
-    Coordinates target = shootAtRandom();
-
-    while (!_hitZones.empty()) {
-        Coordinates source = *_hitZones.begin();
-        if (!shootNearHit(source, target)) {
-            _hitZones.erase(source); // Tis hitzone is blocked on all sides
-        } else {
-            break;
-        }
-    }
-
+    Coordinates target = _hitZones.empty() ? shootAtRandom() : shootNearHit();
 
     _targetGrid.shoot(target.first, target.second);
 
@@ -56,15 +46,16 @@ std::pair<int, int> AIShooter::shootAtRandom() {
     return *available.begin();
 }
 
-bool AIShooter::shootNearHit(Coordinates source, Coordinates &target) {
-    if (exploreUp(source, target)) return true;
-    if (exploreDown(source, target)) return true;
-    if (exploreLeft(source, target)) return true;
-    if (exploreRight(source, target)) return true;
+AIShooter::Coordinates AIShooter::shootNearHit() {
+    Coordinates source = *_hitZones.begin();
+    Coordinates target;
 
-    if (randomNeighbour(source, target)) return true;
+    if (exploreUp(source, target)) return target;
+    if (exploreDown(source, target)) return target;
+    if (exploreLeft(source, target)) return target;
+    if (exploreRight(source, target)) return target;
 
-    return false;
+    return randomNeighbour(source);
 }
 
 
@@ -152,7 +143,7 @@ bool AIShooter::exploreRight(const AIShooter::Coordinates &source, AIShooter::Co
     return found;
 }
 
-bool AIShooter::randomNeighbour(const Coordinates &source, Coordinates &target) {
+AIShooter::Coordinates AIShooter::randomNeighbour(const Coordinates &source) {
     std::vector<Coordinates> possible = {
             Coordinates(source.first + 1, source.second),
             Coordinates(source.first - 1, source.second),
@@ -169,11 +160,6 @@ bool AIShooter::randomNeighbour(const Coordinates &source, Coordinates &target) 
                  });
 
 
-    if(validBounds.empty()) return false;
-
     std::shuffle(validBounds.begin(), validBounds.end(), _randomEngine);
-    target.first = (*validBounds.begin()).first;
-    target.second = (*validBounds.begin()).second;
-
-    return true;
+    return *validBounds.begin();
 }
