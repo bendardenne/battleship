@@ -1,0 +1,1 @@
+add_library(controller AController.cpp DefaultController.cpp PlaceShipsController.cpp FireController.cpp FireController.hpp)

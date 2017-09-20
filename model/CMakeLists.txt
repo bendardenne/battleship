@@ -1,0 +1,1 @@
+add_library(model Game.cpp Grid.cpp Player.cpp Ship.cpp Cell.hpp)
