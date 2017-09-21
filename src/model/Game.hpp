@@ -13,6 +13,7 @@ public:
     Game(GameConfiguration& configuration);
     std::pair<Player, Player> &players();
     GameConfiguration const & configuration() const;
+    bool over();
 protected:
 
 private:

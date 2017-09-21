@@ -61,7 +61,7 @@ void GameWindow::run() {
 
     setController(fire);
 
-    while (_playing) {
+    while (!_game.over()) {
         if(_controller == fire) {
             setController(ai);
         } else if (_controller == ai){
@@ -71,6 +71,8 @@ void GameWindow::run() {
         }
     }
 
+    delete fire;
+    delete ai;
 }
 
 
