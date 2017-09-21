@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <chrono>
 
-RandomShipPlacer::RandomShipPlacer() {}
+RandomShipPlacer::RandomShipPlacer() = default;
 
 void
 RandomShipPlacer::placeShips(Grid &grid) const {
@@ -17,7 +17,7 @@ RandomShipPlacer::placeShips(Grid &grid) const {
         return a->length() > b->length();
     });
 
-    for (auto ship: ships) {
+    for (auto& ship: ships) {
         placeShip(ship, grid);
     }
 }
@@ -25,7 +25,7 @@ RandomShipPlacer::placeShips(Grid &grid) const {
 void
 RandomShipPlacer::placeShip(std::shared_ptr<Ship> ship, Grid &grid) const {
     // FIXME new engine every time?
-    long seed = std::chrono::system_clock::now().time_since_epoch().count();
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::minstd_rand0 randomEngine = std::default_random_engine(seed);
 
     std::vector<std::pair<size_t, size_t >> positions = getAvailablePositions(grid);
@@ -52,7 +52,8 @@ RandomShipPlacer::getAvailablePositions(const Grid &grid) const {
     for (size_t i = 0; i < grid.width(); i++)
         for (size_t j = 0; j < grid.height(); j++)
             if (!grid(j, i).ship)
-                possibilities.push_back(std::pair<size_t, size_t>(j, i));
+                possibilities.emplace_back(j, i);
+
 
     return possibilities;
 }

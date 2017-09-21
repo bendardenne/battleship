@@ -3,19 +3,18 @@
 //
 
 #include <fstream>
-#include "GameWindow.hpp"
 
+#include "GameWindow.hpp"
+#include "HiddenGridWindow.hpp"
+#include "VisibleGridWindow.hpp"
 #include "../controller/PlaceShipsController.hpp"
 #include "../controller/DefaultController.hpp"
 #include "../controller/FireController.hpp"
-#include "../ai/RandomShipPlacer.hpp"
-#include "HiddenGridWindow.hpp"
 #include "../controller/AIFireController.hpp"
 
 
 GameWindow::GameWindow(NCursesWindow &par, Game &game) : NCursesColorWindow(par, par.lines(), par.cols(), 0, 0),
                                                          _game(game),
-                                                         _gridWindows(),
                                                          _statusBar(*this) {
 
     _gridWindows.first = new VisibleGridWindow(*this, game.players().first, 0, 0);
@@ -43,15 +42,15 @@ GameWindow::~GameWindow() {
 
 
 void GameWindow::run() {
-    AController *placeShips = new PlaceShipsController(*this, *_gridWindows.first);
+    auto *placeShips = new PlaceShipsController(*this, *_gridWindows.first);
     placeShips->append(new DefaultController(*this, *_gridWindows.first));
     setController(placeShips);
     delete placeShips;
 
-    AController *fire = new FireController(*this, *_gridWindows.second);
+    auto *fire = new FireController(*this, *_gridWindows.second);
     fire->append(new DefaultController(*this, *_gridWindows.second));
 
-    AIFireController *ai = new AIFireController(*this, *_gridWindows.first);
+    auto ai = new AIFireController(*this, *_gridWindows.first);
     ai->append(new DefaultController(*this, *_gridWindows.first));
 
     setController(fire);
@@ -77,7 +76,7 @@ void GameWindow::setController(AController *controller) {
 }
 
 void GameWindow::quit() {
-    _playing = false;
+    // TODO
 }
 
 void GameWindow::status(std::string const &msg, MessageType type) {

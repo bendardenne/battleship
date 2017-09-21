@@ -4,7 +4,10 @@
 
 #pragma once
 
+#include <cstddef>
+
 #include "Orientation.hpp"
+
 
 typedef struct {
     size_t x;

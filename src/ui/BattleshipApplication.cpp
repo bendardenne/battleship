@@ -33,8 +33,8 @@ int BattleshipApplication::titlesize() const {
     return 1;
 }
 
-void BattleshipApplication::handleArgs(int argc, char **argv) {
-    args.assign(argv + 1, argv + argc);
+void BattleshipApplication::handleArgs(int argc, char* argv[]) {
+    args.assign(argv + 1, argv + argc );
 }
 
 int BattleshipApplication::run() {

@@ -3,7 +3,6 @@
 //
 
 #include "GridWindow.hpp"
-#include "../model/Player.hpp"
 
 GridWindow::GridWindow(NCursesWindow &par, Player &player, int y, int x) :
         NCursesColorWindow(par, player.grid().height() + 2, player.grid().width() + 2, y, x),
@@ -11,11 +10,11 @@ GridWindow::GridWindow(NCursesWindow &par, Player &player, int y, int x) :
         _grid(player.grid()) {
     keypad(true);
     redraw();
-    this->move(0, 0);
+    this->_move(0, 0);
 }
 
 
-int GridWindow::move(int aY, int aX) {
+int GridWindow::_move(int aY, int aX) {
     // Guard against moves on the border.
     if( aY < 0 || aX < 0 || aY >= height() - 2 || aX >= width() - 2 )
         return ERR;

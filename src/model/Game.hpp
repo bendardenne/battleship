@@ -10,7 +10,7 @@
 
 class Game {
 public:
-    Game(GameConfiguration& configuration);
+    explicit Game(GameConfiguration& configuration);
     std::pair<Player, Player> &players();
     GameConfiguration const & configuration() const;
     bool over();

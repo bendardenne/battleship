@@ -5,8 +5,6 @@
 #include <algorithm>
 #include <chrono>
 #include "AIShooter.hpp"
-#include "../model/Cell.hpp"
-#include "../model/ShipLocation.hpp"
 
 AIShooter::AIShooter(Grid &targetGrid) : _targetGrid(targetGrid) {
     long seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -36,7 +34,7 @@ std::pair<int, int> AIShooter::shootAtRandom() {
     for (size_t i = 0; i < _targetGrid.width(); i++)
         for (size_t j = 0; j < _targetGrid.height(); j++)
             if (_targetGrid(j, i).status == CellStatus::clean)
-                available.push_back(Coordinates(j, i));
+                available.emplace_back(j, i);
 
     std::shuffle(available.begin(), available.end(), _randomEngine);
     return *available.begin();

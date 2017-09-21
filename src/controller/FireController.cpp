@@ -21,16 +21,16 @@ void FireController::handleKey(int key) {
 
     switch (key) {
         case KEY_UP:
-            _gridWindow.move(y - 1, x);
+            _gridWindow._move(y - 1, x);
             break;
         case KEY_DOWN:
-            _gridWindow.move(y + 1, x);
+            _gridWindow._move(y + 1, x);
             break;
         case KEY_LEFT:
-            _gridWindow.move(y, x - 1);
+            _gridWindow._move(y, x - 1);
             break;
         case KEY_RIGHT:
-            _gridWindow.move(y, x + 1);
+            _gridWindow._move(y, x + 1);
             break;
         case '\n':
             _gridWindow.grid().shoot(y,x);
@@ -48,7 +48,7 @@ void FireController::handleKey(int key) {
 
 void FireController::enable() {
     _shotsLeft = _shotsPerTurn;
-    _gridWindow.move(0, 0);
+    _gridWindow._move(0, 0);
     _gridWindow.redraw();
     _gameWindow.status(DEFAULT_MESSAGE);
 }

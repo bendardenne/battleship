@@ -15,7 +15,7 @@ void AController::append(AController *next) {
 }
 
 AController::~AController() {
-    if (_next) delete _next;
+    delete _next;
 }
 
 void AController::control() {

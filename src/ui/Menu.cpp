@@ -8,7 +8,7 @@
 class QuitAction : public NCursesMenuItem {
 
 public:
-    QuitAction(const char *name, const char *desc = 0) : NCursesMenuItem(name, desc) { }
+    QuitAction(const char *name, const char *desc = nullptr) : NCursesMenuItem(name, desc) { }
 
     bool action() override {
         return true;
@@ -18,7 +18,7 @@ public:
 
 class StartGameAction : public NCursesMenuItem {
 public:
-    StartGameAction(const char *name, const char *desc = 0) : NCursesMenuItem(name, desc) {}
+    StartGameAction(const char *name, const char *desc = nullptr) : NCursesMenuItem(name, desc) {}
 
     bool action() override {
         return true;
@@ -32,7 +32,7 @@ Menu::Menu(BattleshipApplication *aBattleship) : NCursesMenu(lines(), cols()), _
     setSpacing(8, 0, 0);
 
     // TODO is this deleted??
-    NCursesMenuItem **items = new NCursesMenuItem *[4];
+    auto items = new NCursesMenuItem *[4];
     items[0] = new StartGameAction("Start a Game", "Let's sink some ships!");
     items[1] = new QuitAction("Options");
     items[2] = new QuitAction("Quit");

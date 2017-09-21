@@ -5,7 +5,9 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 #include <vector>
+
 
 #include "ShipLocation.hpp"
 
@@ -13,7 +15,7 @@
 class Ship {
 public:
     Ship(size_t length);
-    Ship(const Ship &other);
+
     size_t const length() const;
     bool const sunk() const;
     const std::string name() const;

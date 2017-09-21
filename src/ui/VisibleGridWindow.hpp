@@ -10,11 +10,9 @@ class VisibleGridWindow : public GridWindow {
 public:
     VisibleGridWindow(NCursesWindow &par, Player &player, int y, int x);
     void redraw() override;
-    int move(int, int) override;
-//    void _getyx(int &, int &) override;
 
 public:
 protected:
 private:
-    void printPlacingShip(const std::shared_ptr<Ship> placingShip);
+    void printPlacingShip(std::shared_ptr<Ship> placingShip);
 };

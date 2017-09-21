@@ -5,6 +5,7 @@
 #include <ostream>
 #include <iostream>
 #include <algorithm>
+
 #include "Ship.hpp"
 
 int Ship::__sId = 0;
@@ -12,8 +13,6 @@ int Ship::__sId = 0;
 Ship::Ship(size_t length) : _length(length), _hits(length), _id(__sId++) {
 
 }
-
-Ship::Ship(Ship const &other) : _id(other._id), _length(other._length), _hits(other._hits) {}
 
 size_t const Ship::length() const {
     return _length;

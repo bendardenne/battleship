@@ -6,11 +6,15 @@
 
 #include <memory>
 
+#include "Ship.hpp"
+
 enum CellStatus {
     clean, hit
 };
 
-typedef struct {
+struct Cell_t {
     std::shared_ptr<Ship> ship;
     CellStatus status;
-} Cell;
+};
+
+using Cell = Cell_t;

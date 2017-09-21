@@ -11,7 +11,7 @@ AIFireController::AIFireController(GameWindow &window, GridWindow& gridWindow) :
 }
 
 void AIFireController::enable() {
-    _gridWindow.move(0, 0);
+    _gridWindow._move(0, 0);
     _gridWindow.redraw();
 }
 
@@ -30,6 +30,6 @@ void AIFireController::control() {
     _gridWindow.redraw();
 }
 
-void AIFireController::handleKey(int key) {
+void AIFireController::handleKey(int  /*key*/) {
 
 }

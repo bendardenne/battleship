@@ -11,8 +11,6 @@ public:
     HiddenGridWindow(NCursesWindow &par, Player &player, int y, int x);
 public:
     void redraw() override;
-    int move(int, int) override;
-//    void getyx(int &, int &) override;
 
 protected:
 private:

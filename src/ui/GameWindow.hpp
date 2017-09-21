@@ -21,7 +21,7 @@ public:
     static const int OPPONENT_GRID_COLOR = OWN_GRID_COLOR + 1;
 
     GameWindow(NCursesWindow& par, Game& game);
-    ~GameWindow();
+    ~GameWindow() override;
 
     void run();
     void quit();
@@ -34,5 +34,4 @@ private:
     StatusBar _statusBar;
 
     AController* _controller;
-    bool _playing = true;
 };

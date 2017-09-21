@@ -7,19 +7,17 @@
 
 #include <algorithm>
 #include <iostream>
-#include <type_traits>
 
 class Label : public NCursesFormField {
 public:
-    Label(std::string label, int y, int x) : NCursesFormField(1, label.length(), y, x) {
+    Label(const std::string& label, int y, int x) : NCursesFormField(1, label.length(), y, x) {
         set_value(label.c_str());
         options_off(O_EDIT | O_ACTIVE);
         bkgd(COLOR_PAIR(1));
     }
 };
 
-ConfigWindow::ConfigWindow(GameConfiguration &config) : NCursesForm(createFields(config), 0, 0, 0, 0, true, true),
-                                                        configFields() {
+ConfigWindow::ConfigWindow(GameConfiguration &config) : NCursesForm(createFields(config), 0, 0, 0, 0, true, true) {
     keypad(true);
 
     wresize(lines() / 2 , cols() / 2);
@@ -60,7 +58,7 @@ NCursesFormField **ConfigWindow::createFields(GameConfiguration &config) {
 
     int offset = 5;
     int row = 0;
-    int col = static_cast<int>(longestLabel + offset);
+    auto col = static_cast<int>(longestLabel + offset);
 
     std::vector<NCursesFormField *> *fields = new std::vector<NCursesFormField *>{
             new NumericResettableField<typeof(config.gridWidth)>(config.gridWidth, 1, 3, row++, col),
@@ -70,7 +68,7 @@ NCursesFormField **ConfigWindow::createFields(GameConfiguration &config) {
 
 
     row = 0;
-    for (std::string label : labels) {
+    for (const std::string& label : labels) {
         fields->push_back(new Label(label, row++, 0));
     }
 
@@ -89,8 +87,8 @@ NCursesFormField **ConfigWindow::createFields(GameConfiguration &config) {
 
 void ConfigWindow::resetFields() {
     for(auto i = 0; i < count(); i++) {
-        if(dynamic_cast<AResettableField*>((*this)[i])) {
-            AResettableField* f = dynamic_cast<AResettableField*>((*this)[i]);
+        if(dynamic_cast<AResettableField*>((*this)[i]) != nullptr) {
+            auto f = dynamic_cast<AResettableField*>((*this)[i]);
             f->reset();
         }
     }
@@ -99,8 +97,8 @@ void ConfigWindow::resetFields() {
 
 void ConfigWindow::apply() {
     for(auto i = 0; i < count(); i++) {
-        if(dynamic_cast<AResettableField*>((*this)[i])) {
-            AResettableField* f = dynamic_cast<AResettableField*>((*this)[i]);
+        if(dynamic_cast<AResettableField*>((*this)[i]) != nullptr) {
+            auto f = dynamic_cast<AResettableField*>((*this)[i]);
             f->apply();
         }
     }

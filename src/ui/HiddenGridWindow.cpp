@@ -3,7 +3,6 @@
 //
 
 #include "HiddenGridWindow.hpp"
-#include "../model/Cell.hpp"
 
 HiddenGridWindow::HiddenGridWindow(NCursesWindow &par, Player &player, int y, int x) : GridWindow(par, player, y, x) {
     keypad(true);
@@ -29,13 +28,6 @@ HiddenGridWindow::redraw() {
     }
 
     // Replace cursor where it was.
-    move(y, x);
+    _move(y, x);
     syncup();
-}
-
-
-// Need to hide because parent hides
-int
-HiddenGridWindow::move(int y, int x) {
-    return GridWindow::move(y, x);
 }

@@ -30,7 +30,7 @@ void VisibleGridWindow::redraw() {
     if (placingShip) printPlacingShip(placingShip);
 
     // Replace cursor where it was.
-    move(y, x);
+    _move(y, x);
     syncup();
     refresh();
 }
@@ -58,14 +58,3 @@ void VisibleGridWindow::printPlacingShip(const std::shared_ptr<Ship> placingShip
 
     attrset(restore);
 }
-
-
-// Need to hide because parent hides
-int VisibleGridWindow::move(int y, int x) {
-    return GridWindow::move(y, x);
-}
-
-//
-//void VisibleGridWindow::_getyx(int &y, int &x) {
-//    GridWindow::_getyx(y, x);
-//}

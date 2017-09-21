@@ -28,7 +28,7 @@ public:
 
 
 protected:
-    virtual T from_str(std::string value) {
+    virtual T from_str(const std::string& value) {
         T tmp;
         std::istringstream ss(value);
         ss >> tmp;

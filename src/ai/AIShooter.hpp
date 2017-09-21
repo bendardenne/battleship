@@ -19,8 +19,8 @@ protected:
 
 private:
     // TODO Check hidden from calling code.
-    // We could actually have this defined somewhere as, but for toying purposes I will leave this definition internal.
-    typedef std::pair<int,int> Coordinates;
+    // We could actually have this defined somewhere, but for toying purposes I will leave this definition internal.
+    using Coordinates = std::pair<int,int>;
 
     std::minstd_rand0 _randomEngine;
     Grid& _targetGrid;

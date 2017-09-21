@@ -18,14 +18,14 @@ private:
     std::vector<std::string> args;
 
 protected:
-    void init(bool bColors);
-    virtual int titlesize() const;
-    virtual void title();
+    void init(bool bColors) override;
+    int titlesize() const override;
+    void title() override ;
 
 public:
     BattleshipApplication();
 
-    virtual void handleArgs(int argc, char *argv[]);
-    virtual int run();
+    void handleArgs(int argc, char *argv[]) override ;
+    int run() override;
     void showTitleScreen();
 };

@@ -16,7 +16,6 @@
 - RandomShipPlacer  what if no room? -> currently, just fails to place ship.
 - Configuration
 - Fleet should be in config
-- Blink current placing ship?
 - Show fleet panel
 - Leader board?
 - Timed Games?

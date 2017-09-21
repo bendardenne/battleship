@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
         BattleshipApplication app;
         app.handleArgs(argc, argv);
         res = app();
-    } catch (const NCursesException *e) {
+    } catch (const NCursesException *e) {   //NOLINT -- NCurses presumably throws ptrs, nothing we can do about it
         std::cerr << e->message << std::endl;
         res = e->errorno;
     } catch (const NCursesException &e) {

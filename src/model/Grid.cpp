@@ -13,11 +13,6 @@ Grid::Grid(size_t width, size_t height) : _width(width), _height(height),  _plac
     }
 }
 
-Grid::Grid(const Grid &other) : _width(other._width), _height(other._height), _placing(other._placing),
-                                _shipLocations(other._shipLocations), _ships(other._ships), _cells(other._cells) {
-
-}
-
 size_t Grid::width() const {
     return _width;
 }
@@ -124,11 +119,11 @@ const std::vector<std::shared_ptr<Ship>> Grid::fleet() const {
 
 const std::vector<std::shared_ptr<Ship>> Grid::createShipsList() {
     std::vector<std::shared_ptr<Ship>> ships;
-    ships.push_back(std::shared_ptr<Ship>(new Ship(5)));
-    ships.push_back(std::shared_ptr<Ship>(new Ship(4)));
-    ships.push_back(std::shared_ptr<Ship>(new Ship(3)));
-    ships.push_back(std::shared_ptr<Ship>(new Ship(3)));
-    ships.push_back(std::shared_ptr<Ship>(new Ship(2)));
+    ships.push_back(std::make_shared<Ship>(5));
+    ships.push_back(std::make_shared<Ship>(4));
+    ships.push_back(std::make_shared<Ship>(3));
+    ships.push_back(std::make_shared<Ship>(3));
+    ships.push_back(std::make_shared<Ship>(2));
 
     return ships;
 }

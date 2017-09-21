@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+
 #include "Ship.hpp"
 #include "Cell.hpp"
 
@@ -9,11 +10,10 @@ class Grid {
 
 public:
     Grid(size_t width, size_t height);
-    Grid(const Grid &other);
 
     size_t width() const;
     size_t height() const;
-    Cell operator()(size_t y, size_t x) const; // [] operator ????
+    Cell operator()(size_t y, size_t x) const;
 
     const std::map<Ship, ShipLocation> shipLocations() const;
     const std::vector<std::shared_ptr<Ship>> fleet() const;
