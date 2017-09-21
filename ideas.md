@@ -1,15 +1,15 @@
 
 # Code
 
-- GridWindows can be refs?
+- size_t / int issues
 - Should Grid manage the placing?
 - Cleaner color use
 - Use smart pointers
 - Check usages of references / pointers / pass-by-value / etc.
 - Check const
-- Valgrind
 - Use namespaces?
 - Use doxygen
+- Unit tests
 
 # Functionalities
 

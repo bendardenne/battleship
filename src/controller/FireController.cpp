@@ -9,7 +9,7 @@
 const std::string &FireController::DEFAULT_MESSAGE = "← → ↓ ↑: Move\tEnter: Fire\tq: Quit";
 
 
-FireController::FireController(GameWindow &window, GridWindow *gridWindow) : AController(window, *gridWindow), _gridWindow(gridWindow) {
+FireController::FireController(GameWindow &window, GridWindow& gridWindow) : AController(window, gridWindow), _gridWindow(gridWindow) {
 
 }
 
@@ -17,24 +17,24 @@ void FireController::handleKey(int key) {
     _gameWindow.status(DEFAULT_MESSAGE);
 
     int x, y;
-    _gridWindow->_getyx(y, x);
+    _gridWindow._getyx(y, x);
 
     switch (key) {
         case KEY_UP:
-            _gridWindow->move(y - 1, x);
+            _gridWindow.move(y - 1, x);
             break;
         case KEY_DOWN:
-            _gridWindow->move(y + 1, x);
+            _gridWindow.move(y + 1, x);
             break;
         case KEY_LEFT:
-            _gridWindow->move(y, x - 1);
+            _gridWindow.move(y, x - 1);
             break;
         case KEY_RIGHT:
-            _gridWindow->move(y, x + 1);
+            _gridWindow.move(y, x + 1);
             break;
         case '\n':
-            _gridWindow->grid().shoot(y,x);
-            showOutcome(_gridWindow->grid()(y,x));
+            _gridWindow.grid().shoot(y,x);
+            showOutcome(_gridWindow.grid()(y,x));
             _shotsLeft--;
             break;
         default:
@@ -42,14 +42,14 @@ void FireController::handleKey(int key) {
                 _next->handleKey(key);
     }
 
-    _gridWindow->redraw();
-    _gridWindow->refresh();
+    _gridWindow.redraw();
+    _gridWindow.refresh();
 }
 
 void FireController::enable() {
     _shotsLeft = _shotsPerTurn;
-    _gridWindow->move(0, 0);
-    _gridWindow->redraw();
+    _gridWindow.move(0, 0);
+    _gridWindow.redraw();
     _gameWindow.status(DEFAULT_MESSAGE);
 }
 

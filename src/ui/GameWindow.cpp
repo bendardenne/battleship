@@ -43,21 +43,16 @@ GameWindow::~GameWindow() {
 
 
 void GameWindow::run() {
-    // Queue of controllers to enable successively
-//    std::queue<AController *> controllers;
-
-    AController *placeShips = new PlaceShipsController(*this, _gridWindows.first);
+    AController *placeShips = new PlaceShipsController(*this, *_gridWindows.first);
     placeShips->append(new DefaultController(*this, *_gridWindows.first));
     setController(placeShips);
     delete placeShips;
 
-    AController *fire = new FireController(*this, _gridWindows.second);
+    AController *fire = new FireController(*this, *_gridWindows.second);
     fire->append(new DefaultController(*this, *_gridWindows.second));
-//    controllers.push(fire);
 
     AIFireController *ai = new AIFireController(*this, *_gridWindows.first);
     ai->append(new DefaultController(*this, *_gridWindows.first));
-//    controllers.push(ai);
 
     setController(fire);
 

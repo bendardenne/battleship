@@ -11,7 +11,7 @@
 
 class PlaceShipsController : public AController {
 public:
-    PlaceShipsController(GameWindow& window, GridWindow* gridWindow);
+    PlaceShipsController(GameWindow& window, GridWindow& gridWindow);
     void handleKey(int key);
     bool finished() const override;
     void enable() override;
@@ -20,7 +20,7 @@ protected:
     bool anchorShip();
 private:
     static const std::string &DEFAULT_MESSAGE;
-    GridWindow *_gridWindow;
+    GridWindow& _gridWindow;
 
     std::queue<std::shared_ptr<Ship>> createShipsList(const std::vector<std::shared_ptr<Ship>> vector);
 };

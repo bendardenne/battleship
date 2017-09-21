@@ -9,7 +9,7 @@
 
 class FireController : public AController {
 public:
-    FireController(GameWindow &window, GridWindow *gridWindow);
+    FireController(GameWindow &window, GridWindow &gridWindow);
     void handleKey(int key) override;
     void enable() override;
     bool finished() const override;
@@ -18,7 +18,7 @@ protected:
 private:
     static const std::string &DEFAULT_MESSAGE;
 
-    GridWindow* _gridWindow;
+    GridWindow& _gridWindow;
     unsigned _shotsPerTurn = 3;     //TODO get from config
     unsigned _shotsLeft;
 
