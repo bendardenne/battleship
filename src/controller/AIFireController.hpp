@@ -21,5 +21,6 @@ protected:
 private:
     AIShooter _ai;
     GridWindow& _gridWindow;
+    int _shotsPerTurn = 3;
 };
 

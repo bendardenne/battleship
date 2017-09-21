@@ -22,17 +22,11 @@ bool AIFireController::finished() const {
 
 void AIFireController::control() {
     std::string msg;
-    std::pair<int, int> target = _ai.shoot();
-    msg += std::to_string(target.second) + " " + std::to_string(target.first);
 
-    target = _ai.shoot();
-    msg += std::to_string(target.second) + " " + std::to_string(target.first);
+    for(auto i = 0; i < _shotsPerTurn; i++){
+        _ai.shoot();
+    }
 
-    target = _ai.shoot();
-    msg += std::to_string(target.second) + " " + std::to_string(target.first);
-
-
-    _gameWindow.status(msg);
     _gridWindow.redraw();
 }
 

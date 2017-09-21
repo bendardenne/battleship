@@ -9,18 +9,15 @@
 #include "../model/ShipLocation.hpp"
 
 AIShooter::AIShooter(Grid &targetGrid) : _targetGrid(targetGrid) {
-    //FIXME new engine evey time?
     long seed = std::chrono::system_clock::now().time_since_epoch().count();
     _randomEngine = std::default_random_engine(seed);
 }
 
 std::pair<int, int> AIShooter::shoot() {
     Coordinates target = _hitZones.empty() ? shootAtRandom() : shootNearHit();
-
     _targetGrid.shoot(target.first, target.second);
 
     const std::shared_ptr<Ship> &ship = _targetGrid(target.first, target.second).ship;
-
     if (ship) {
         if (!ship->sunk()) {
             _hitZones.insert(target);
@@ -33,7 +30,6 @@ std::pair<int, int> AIShooter::shoot() {
 }
 
 std::pair<int, int> AIShooter::shootAtRandom() {
-
 
     // TODO what if nothing available?
     std::vector<Coordinates> available;
@@ -83,7 +79,7 @@ bool AIShooter::exploreUp(const Coordinates &source, Coordinates &targetSFTC) {
     targetSFTC.first = y;
     targetSFTC.second = x;
 
-    return found;
+    return found && y >= 0;
 }
 
 bool AIShooter::exploreDown(const AIShooter::Coordinates &source, AIShooter::Coordinates &targetSFTC) {
@@ -102,7 +98,7 @@ bool AIShooter::exploreDown(const AIShooter::Coordinates &source, AIShooter::Coo
     targetSFTC.first = y;
     targetSFTC.second = x;
 
-    return found;
+    return found && y < _targetGrid.height();
 }
 
 bool AIShooter::exploreLeft(const AIShooter::Coordinates &source, AIShooter::Coordinates &targetSFTC) {
@@ -121,7 +117,7 @@ bool AIShooter::exploreLeft(const AIShooter::Coordinates &source, AIShooter::Coo
     targetSFTC.first = y;
     targetSFTC.second = x;
 
-    return found;
+    return found && x >= 0;
 }
 
 bool AIShooter::exploreRight(const AIShooter::Coordinates &source, AIShooter::Coordinates &targetSFTC) {
@@ -130,7 +126,7 @@ bool AIShooter::exploreRight(const AIShooter::Coordinates &source, AIShooter::Co
     bool found = false;
 
 
-    while (++x < _targetGrid.height() && _targetGrid(y, x).status == CellStatus::hit) {
+    while (++x < _targetGrid.width() && _targetGrid(y, x).status == CellStatus::hit) {
         if (_targetGrid(y, x).ship) {
             found = true;
         } else
@@ -140,7 +136,7 @@ bool AIShooter::exploreRight(const AIShooter::Coordinates &source, AIShooter::Co
     targetSFTC.first = y;
     targetSFTC.second = x;
 
-    return found;
+    return found && x < _targetGrid.width();
 }
 
 AIShooter::Coordinates AIShooter::randomNeighbour(const Coordinates &source) {

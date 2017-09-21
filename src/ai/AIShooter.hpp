@@ -13,14 +13,13 @@ class AIShooter {
 
 public:
     AIShooter(Grid& targetGrid);
-
     std::pair<int, int> shoot();
 
 protected:
 
 private:
     // TODO Check hidden from calling code.
-    // We could actually have this defined somewhere, but for toying purposes I will leave this definition internal.
+    // We could actually have this defined somewhere as, but for toying purposes I will leave this definition internal.
     typedef std::pair<int,int> Coordinates;
 
     std::minstd_rand0 _randomEngine;
