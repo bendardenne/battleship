@@ -2,8 +2,9 @@
 #include "Cell.hpp"
 #include "ShipLocation.hpp"
 
-Grid::Grid(size_t width, size_t height) : _width(width), _height(height), _ships(createShipsList()), _placing(nullptr) {
-    _cells = std::vector<std::vector<Cell>>(_width);
+Grid::Grid(size_t width, size_t height) : _width(width), _height(height),  _placing(nullptr), _ships(createShipsList()),
+                                          _cells(_width)
+                                          {
     for (size_t i = 0; i < _width; i++) {
         _cells[i].resize(_height);
         for (auto j = 0; j < _height; j++) {

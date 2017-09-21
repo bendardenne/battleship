@@ -24,8 +24,6 @@ void PlaceShipsController::handleKey(int key) {
     Grid &grid = _gridWindow.grid();
     std::shared_ptr<Ship> shipToPlace = _shipsToPlace.front();
     ShipLocation newLoc;
-    RandomShipPlacer placer;
-
 
     int x, y;
     _gridWindow._getyx(y, x);
@@ -46,10 +44,6 @@ void PlaceShipsController::handleKey(int key) {
         case 'r' :
             newLoc = grid.rotateShip(shipToPlace);
             _gridWindow.move(newLoc.y, newLoc.x);
-            break;
-        case 's' :
-            placer.placeShips(_gridWindow.grid());
-            _shipsToPlace = std::queue<std::shared_ptr<Ship>>();
             break;
         case '\n':
             if (!anchorShip()) _gameWindow.status("Cannot place " + shipToPlace->name() + " here", MessageType::error);
@@ -90,8 +84,9 @@ bool PlaceShipsController::anchorShip() {
 std::queue<std::shared_ptr<Ship>>
 PlaceShipsController::createShipsList(const std::vector<std::shared_ptr<Ship>> vector) {
     std::queue<std::shared_ptr<Ship>> c;
-    for (auto s : vector) {
+
+    for (auto s : vector)
         c.push(s);
-    }
+
     return c;
 }

@@ -29,10 +29,11 @@ protected:
 private:
     size_t _width;
     size_t _height;
-    std::vector<std::vector<Cell>> _cells;
     std::shared_ptr<Ship> _placing;
     std::map<Ship, ShipLocation> _shipLocations;
     const std::vector<std::shared_ptr<Ship>> _ships;
+    std::vector<std::vector<Cell>> _cells;
+
     const std::vector<std::shared_ptr<Ship>> createShipsList();
     size_t getShipHitZone(size_t y, size_t x, ShipLocation &shipLocation);
 };
