@@ -13,7 +13,7 @@ class PlaceShipsController : public AController {
 public:
     PlaceShipsController(GameWindow& window, GridWindow& gridWindow);
     void handleKey(int key) override ;
-    bool finished() const override;
+    bool enabled() const override;
     void enable() override;
 
 protected:

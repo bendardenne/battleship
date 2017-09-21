@@ -13,7 +13,6 @@ public:
     AIFireController(GameWindow &window, GridWindow& gridWindow);
 
     void enable() override;
-    bool finished() const override;
     void handleKey(int key) override;
     void control() override;
 public:

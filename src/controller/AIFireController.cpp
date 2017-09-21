@@ -11,14 +11,11 @@ AIFireController::AIFireController(GameWindow &window, GridWindow& gridWindow) :
 }
 
 void AIFireController::enable() {
+    AController::enable();
+
     _gridWindow._move(0, 0);
     _gridWindow.redraw();
 }
-
-bool AIFireController::finished() const {
-    return false;
-}
-
 
 void AIFireController::control() {
     std::string msg;

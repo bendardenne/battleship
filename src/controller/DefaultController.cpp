@@ -19,11 +19,3 @@ void DefaultController::handleKey(int key) {
                 _next->handleKey(key);
     }
 }
-
-void DefaultController::enable() {
-
-}
-
-bool DefaultController::finished() const {
-    return false;
-}

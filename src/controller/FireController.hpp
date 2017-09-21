@@ -12,7 +12,7 @@ public:
     FireController(GameWindow &window, GridWindow &gridWindow);
     void handleKey(int key) override;
     void enable() override;
-    bool finished() const override;
+    bool enabled() const override;
 public:
 protected:
 private:

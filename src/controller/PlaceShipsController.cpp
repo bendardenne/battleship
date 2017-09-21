@@ -13,8 +13,8 @@ const std::string &PlaceShipsController::DEFAULT_MESSAGE = "← → ↓ ↑: Mov
 PlaceShipsController::PlaceShipsController(GameWindow &window, GridWindow& gridWindow) :
         AController(window, gridWindow), _shipsToPlace(createShipsList(gridWindow.grid().fleet())), _gridWindow(gridWindow) {}
 
-bool PlaceShipsController::finished() const {
-    return _shipsToPlace.empty();
+bool PlaceShipsController::enabled() const {
+    return AController::enabled() && !_shipsToPlace.empty();
 }
 
 
@@ -57,6 +57,8 @@ void PlaceShipsController::handleKey(int key) {
 }
 
 void PlaceShipsController::enable() {
+    AController::enable();
+
     _gridWindow._move(0, 0);
     _gridWindow.grid().addShip(_shipsToPlace.front());
     _gridWindow.redraw();

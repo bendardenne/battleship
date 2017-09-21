@@ -5,6 +5,7 @@
 #include "Menu.hpp"
 
 
+// TODO actual actions !
 class QuitAction : public NCursesMenuItem {
 
 public:

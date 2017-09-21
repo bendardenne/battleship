@@ -53,16 +53,8 @@ void GameWindow::run() {
     auto ai = new AIFireController(*this, *_gridWindows.first);
     ai->append(new DefaultController(*this, *_gridWindows.first));
 
-    setController(fire);
-
-    while (!_game.over()) {
-        if(_controller == fire) {
-            setController(ai);
-        } else if (_controller == ai){
-            setController(fire);
-        } else {
-            return;     // Shouldn't happen
-        }
+    while (!_quit && !_game.over()) {
+        _controller == fire ? setController(ai) : setController(fire);
     }
 
     delete fire;
@@ -75,8 +67,11 @@ void GameWindow::setController(AController *controller) {
     _controller->control();
 }
 
-void GameWindow::quit() {
-    // TODO
+void GameWindow::quit(){
+    // Notify controller to relinquish control
+    _controller->disable();
+    // Set flag to leave main loop
+    _quit = true;
 }
 
 void GameWindow::status(std::string const &msg, MessageType type) {

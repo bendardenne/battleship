@@ -10,8 +10,6 @@ class DefaultController : public AController {
 public:
     DefaultController(GameWindow& gameWindow, NCursesWindow& eventSource);
     void handleKey(int key) override;
-    bool finished() const override;
-    void enable() override;
 protected:
 private:
 };

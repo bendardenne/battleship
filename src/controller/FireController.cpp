@@ -47,14 +47,16 @@ void FireController::handleKey(int key) {
 }
 
 void FireController::enable() {
+    AController::enable();
+
     _shotsLeft = _shotsPerTurn;
     _gridWindow._move(0, 0);
     _gridWindow.redraw();
     _gameWindow.status(DEFAULT_MESSAGE);
 }
 
-bool FireController::finished() const {
-    return !_shotsLeft;
+bool FireController::enabled() const {
+    return AController::enabled() && _shotsLeft;
 }
 
 void FireController::showOutcome(Cell hitCell) {

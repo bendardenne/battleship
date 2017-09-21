@@ -18,7 +18,6 @@ public:
 protected:
 
 private:
-    // TODO Check hidden from calling code.
     // We could actually have this defined somewhere, but for toying purposes I will leave this definition internal.
     using Coordinates = std::pair<int,int>;
 

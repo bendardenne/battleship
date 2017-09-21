@@ -34,4 +34,5 @@ private:
     StatusBar _statusBar;
 
     AController* _controller;
+    bool _quit;
 };
