@@ -16,16 +16,20 @@
 #include <string>
 #include <vector>
 
-#include "BattleshipApplication.hpp"
-
+// Forward declaration due to mutual inclusion.
+class BattleshipApplication;
 
 class Menu : public NCursesMenu {
 
 public:
-    Menu(BattleshipApplication* aBattleship);
+    Menu(BattleshipApplication* application);
     int virtualize(int c) override;
     void On_Menu_Termination() override;
 
 private:
-    BattleshipApplication* _application;
+    BattleshipApplication* const _application;
+
+    class QuitAction;
+    class StartGameAction;
+    class ShowConfigAction;
 };

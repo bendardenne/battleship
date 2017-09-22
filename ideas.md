@@ -1,6 +1,7 @@
 
 # Code
 
+- Config: sometimes value not "applied"
 - Resolve resources relative to argv[0]
 - size_t / int issues
 - Should Grid manage the placing?

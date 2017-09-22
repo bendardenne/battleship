@@ -6,7 +6,6 @@
 #include <algorithm>
 
 #include "BattleshipApplication.hpp"
-#include "Menu.hpp"
 #include "config/ConfigWindow.hpp"
 
 BattleshipApplication::BattleshipApplication() : NCursesApplication(true) {
@@ -33,41 +32,45 @@ int BattleshipApplication::titlesize() const {
     return 1;
 }
 
-void BattleshipApplication::handleArgs(int argc, char* argv[]) {
-    args.assign(argv + 1, argv + argc );
+void BattleshipApplication::handleArgs(int argc, char *argv[]) {
+    args.assign(argv + 1, argv + argc);
 }
 
 int BattleshipApplication::run() {
     showTitleScreen();
 
-    Menu menu(this);
-    menu.mvwin(Root_Window->height() / 2 - menu.height() / 2, Root_Window->width() / 2 - menu.width() / 2);
-    NCursesMenuItem *selected = menu();
+    while (!_quit) {
+        Root_Window->clear();
 
-    // TODO do this better? quit() method on the Application class?
-    if (std::string(selected->name()) == "Quit") {
-        return EXIT_SUCCESS;
+        Menu menu(this);
+        menu.mvwin(Root_Window->height() / 2 - menu.height() / 2, Root_Window->width() / 2 - menu.width() / 2);
+        menu();
     }
-
-    GameConfiguration config = {.gridWidth = 10,
-            .gridHeight = 10,
-            .shotsPerTurn = 3,
-            .player1 = "Player1",
-            .player2 = "Player2"};
-
-    if (std::string(selected->name()) == "Options") {
-        ConfigWindow configWindow(config);
-        configWindow.mvwin(Root_Window->height() / 2 - configWindow.height() / 2,
-                           Root_Window->width() / 2 - configWindow.width() / 2);
-        configWindow();
-    }
-
-
-    Game game(config);
-    GameWindow gameWindow(*Root_Window, game);
-    gameWindow.run();
 
     return EXIT_SUCCESS;
+}
+
+void BattleshipApplication::quit() {
+    _quit = true;
+}
+
+void BattleshipApplication::showConfig() {
+    Root_Window->clear();
+    Root_Window->refresh();
+
+    ConfigWindow configWindow(_config);
+    configWindow.mvwin(Root_Window->height() / 2 - configWindow.height() / 2,
+                       Root_Window->width() / 2 - configWindow.width() / 2);
+    configWindow();
+}
+
+void BattleshipApplication::startGame() {
+    Root_Window->clear();
+    Root_Window->refresh();
+
+    Game game(_config);
+    GameWindow gameWindow(*Root_Window, game);
+    gameWindow.run();
 }
 
 void BattleshipApplication::showTitleScreen() {
