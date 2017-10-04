@@ -15,6 +15,9 @@ public:
 
     const Grid & grid() const;
     Grid &grid();
+
+    std::string const name() const;
+
 protected:
 private:
     std::string _name;

@@ -34,12 +34,6 @@ public:
     void quit();
 
     bool _quit = false;
-    GameConfiguration _config = {
-        .gridWidth = 10,
-        .gridHeight = 10,
-        .shotsPerTurn = 3,
-        .player1 = "Player1",
-        .player2 = "Player2"
-    };
-//    Menu _menu;
+
+    GameConfiguration _config;
 };

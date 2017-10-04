@@ -18,3 +18,7 @@ Grid const & Player::grid() const {
 Grid & Player::grid() {
     return _grid;
 }
+
+std::string const Player::name() const {
+    return _name;
+}
